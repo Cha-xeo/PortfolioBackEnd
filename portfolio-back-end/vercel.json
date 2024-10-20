@@ -1,16 +1,15 @@
 {
-    "buildCommand": "yarn build",
-    "functions": {
-      "api/index.ts": {
-        "memory": 1024,
-        "maxDuration": 10
+    "builds": [
+      {
+        "src": "api/index.ts",
+        "use": "@vercel/node"
       }
-    },
+    ],
     "routes": [
-        { 
-            "src": "/(.*)",
-            "dest": "/api/index.ts"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "/api/index.ts"
+      }
     ]
   }
   
