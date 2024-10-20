@@ -1,17 +1,16 @@
+import express, { Express } from 'express';  // Correctly imports Express
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import * as express from 'express';
 
-const server = express();
+const server: Express = express();
 
-const createNestServer = async (expressInstance) => {
+async function createNestServer(expressInstance: Express) {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(expressInstance));
-  app.setGlobalPrefix('api'); // Optional: to add a global prefix like '/api'
+  app.setGlobalPrefix('api');  // Optional: add '/api' prefix to all routes
   await app.init();
-};
+}
 
 createNestServer(server);
 
-// Export the server to be used as a serverless function in Vercel
 export default server;
